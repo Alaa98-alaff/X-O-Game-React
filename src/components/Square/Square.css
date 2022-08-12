@@ -1,0 +1,8 @@
+.sqr {
+  width: 130px;
+  height: 130px;
+  border: 1px black solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

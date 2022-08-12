@@ -1,0 +1,11 @@
+.board {
+  width: 500px;
+  height: 500px;
+  text-align: center;
+}
+
+.sqrs-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
