@@ -9,34 +9,35 @@ function Board() {
   const [oIndexs, setOIndexs] = useState([]);
 
   const handleSq = (sqrIndex) => {
-    if (currentPlayer === "X") {
-      // check if current sqr havent been selected before
-      for (let i = 0; i < xIndexs.length; i++) {
-        if (xIndexs[i] === sqrIndex) return;
-      }
-      for (let i = 0; i < oIndexs.length; i++) {
-        if (oIndexs[i] === sqrIndex) return;
+    if (winner === "null") {
+      if (currentPlayer === "X") {
+        // check if current sqr havent been selected before
+        for (let i = 0; i < xIndexs.length; i++) {
+          if (xIndexs[i] === sqrIndex) return;
+        }
+        for (let i = 0; i < oIndexs.length; i++) {
+          if (oIndexs[i] === sqrIndex) return;
+        }
+
+        setXIndexs([...xIndexs, sqrIndex]);
+        setCurrentPlayer("O");
       }
 
-      setXIndexs([...xIndexs, sqrIndex]);
-      setCurrentPlayer("O");
+      if (currentPlayer === "O") {
+        // check if current sqr havent been selected before
+        for (let i = 0; i < xIndexs.length; i++) {
+          if (xIndexs[i] === sqrIndex) return;
+        }
+        for (let i = 0; i < oIndexs.length; i++) {
+          if (oIndexs[i] === sqrIndex) return;
+        }
+
+        setOIndexs([...oIndexs, sqrIndex]);
+        setCurrentPlayer("X");
+      }
+
+      return currentPlayer;
     }
-
-    if (currentPlayer === "O") {
-      // check if current sqr havent been selected before
-      for (let i = 0; i < xIndexs.length; i++) {
-        if (xIndexs[i] === sqrIndex) return;
-      }
-      for (let i = 0; i < oIndexs.length; i++) {
-        if (oIndexs[i] === sqrIndex) return;
-      }
-
-      setOIndexs([...oIndexs, sqrIndex]);
-      setCurrentPlayer("X");
-    }
-
-    console.log(currentPlayer, "sssssss");
-    return currentPlayer;
   };
 
   useEffect(() => {
@@ -69,10 +70,12 @@ function Board() {
 
   return (
     <div className="board">
-      <div>
-        Current Player: <strong>{currentPlayer}</strong>
+      <div style={{ marginBottom: "10px", fontSize: "20px" }}>
+        <div style={winner !== "null" ? { opacity: "0" } : { opacity: 1 }}>
+          Current Player: <strong>{currentPlayer}</strong>
+        </div>
       </div>
-      <div>
+      <div style={{ marginBottom: "20px", fontSize: "20px" }}>
         Winner: <strong>{winner}</strong>
       </div>
       <div className="sqrs-row">
